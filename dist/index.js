@@ -1,4 +1,4 @@
-fetch('https://cdn.jsdelivr.net/gh/JamesRobertHugginsNgo/test-component@develop/dist/template.html').then((response) => {
+fetch('https://cdn.jsdelivr.net/gh/JamesRobertHugginsNgo/test-component@1.0.0/dist/template.html').then((response) => {
 	return response.text();
 }).then((templateString) => {
 	document.body.insertAdjacentHTML('beforeend', templateString);
