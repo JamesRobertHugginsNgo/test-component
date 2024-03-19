@@ -1,4 +1,4 @@
-fetch('https://cdn.jsdelivr.net/gh/JamesRobertHugginsNgo/test-component@1.0.0/dist/template.html').then((response) => {
+fetch('/dist/template.html').then((response) => {
 	return response.text();
 }).then((templateString) => {
 	document.body.insertAdjacentHTML('beforeend', templateString);
@@ -6,6 +6,8 @@ fetch('https://cdn.jsdelivr.net/gh/JamesRobertHugginsNgo/test-component@1.0.0/di
 
 	customElements.define('test-component', class extends HTMLElement {
 		static observedAttributes = ['greeting'];
+
+		#greetingElement;
 
 		constructor() {
 			super();
@@ -15,7 +17,7 @@ fetch('https://cdn.jsdelivr.net/gh/JamesRobertHugginsNgo/test-component@1.0.0/di
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
-			this.greetingElement = this.shadowRoot.getElementById('greeting');
+			this.#greetingElement = this.shadowRoot.getElementById('greeting');
 		}
 
 		connectedCallback() {
@@ -46,9 +48,9 @@ fetch('https://cdn.jsdelivr.net/gh/JamesRobertHugginsNgo/test-component@1.0.0/di
 			switch(name) {
 				case 'greeting':
 					if (!newValue) {
-						this.greetingElement.textContent = 'Hello';
+						this.#greetingElement.textContent = 'Hello';
 					} else {
-						this.greetingElement.textContent = newValue;
+						this.#greetingElement.textContent = newValue;
 					}
 					break;
 			}

@@ -7,6 +7,8 @@ fetch('{{dist}}/template.html').then((response) => {
 	customElements.define('test-component', class extends HTMLElement {
 		static observedAttributes = ['greeting'];
 
+		#greetingElement;
+
 		constructor() {
 			super();
 
@@ -15,7 +17,7 @@ fetch('{{dist}}/template.html').then((response) => {
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.appendChild(templateElement.content.cloneNode(true));
 
-			this.greetingElement = this.shadowRoot.getElementById('greeting');
+			this.#greetingElement = this.shadowRoot.getElementById('greeting');
 		}
 
 		connectedCallback() {
@@ -46,9 +48,9 @@ fetch('{{dist}}/template.html').then((response) => {
 			switch(name) {
 				case 'greeting':
 					if (!newValue) {
-						this.greetingElement.textContent = 'Hello';
+						this.#greetingElement.textContent = 'Hello';
 					} else {
-						this.greetingElement.textContent = newValue;
+						this.#greetingElement.textContent = newValue;
 					}
 					break;
 			}
